@@ -1,0 +1,10 @@
+{
+  "name": "8shApi",
+  "version": "1.0.0",
+  "description": "8shApi for walMartLabs",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "hapi": "^17.7.0"
+  }
+}
