@@ -5,7 +5,8 @@ Per the instruction given for the WML Take Home Challenge, I built up an api ser
 
 To search the API using this app enter a URL as follows:
 http://localhost:8000/<search term goes here>
-EXAMPLE: http://localhost:8000/backpack
+#### EXAMPLE: #### 
+http://localhost:8000/backpack
   
 Instructions for getting started:
 Clone repo
