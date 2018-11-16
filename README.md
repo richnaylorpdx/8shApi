@@ -1,5 +1,5 @@
 # 8shApi
-Markup : #### HAPI project ####
+#### HAPI project ####
 
 Per the instruction given for the WML Take Home Challenge, I built up an api service using HAPI.JS. Thx to the WML folks for suggesting this, I would have done this using Express without this suggestion and HAPI is much faster to get going. The API service uses a precomposed api search URL to get a response of items that is fundamentally the data source in this case. I do wonder if I interpreted this part correctly. Regardless, upon succesful response from the WML API, the payload response is converted to JSON, and then the 'items' array is filtered for the 'search' term, 'itemId' is added to array for items with matching results, itemId array is returned if it contains any items. 
 
