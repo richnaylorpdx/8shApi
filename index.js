@@ -1,7 +1,7 @@
 'use strict';
 
 const Hapi = require('hapi');
-
+const Wreck = require('wreck');
 const server = Hapi.server({
     port: 8000,
     host: 'localhost'
@@ -1162,23 +1162,101 @@ server.route({
     }
 });
 
+const example = async function () {
+    const { res, payload } = await Wreck.get('http://api.walmartlabs.com/v1/items?ids=14225185,14225186,14225188,14225187,39082884,30146244,12662817,34890820,19716431,42391766,35813552,40611708,40611825,36248492,44109840,23117408,35613901,42248076&apiKey=kjybrqfdgp3u4yv2qzcnjndj');
+    console.log(payload.toString());
+    return payload.toString();
+}
+
+server.route({
+    method: 'GET',
+    path: '/wreck',
+    handler: (request, h) => {
+        try{
+            return example();
+        } catch (ex) {
+            console.error(ex);
+        } 
+    }
+});
+
+const apiRequest = async function () {
+        const result = request('http://api.walmartlabs.com/v1/items?ids=14225185,14225186,14225188,14225187,39082884,30146244,12662817,34890820,19716431,42391766,35813552,40611708,40611825,36248492,44109840,23117408,35613901,42248076&apiKey=kjybrqfdgp3u4yv2qzcnjndj', (error, response, body) => {
+            console.log('error:', error); // Print the error if one occurred
+            console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
+            console.log('body:', body); // Print the HTML for the Google homepage.
+        });
+
+        return result;
+};
+
 server.route({
     method: 'GET',
     path: '/{query}',
     handler: (request, h) => {
 
-        const thisArr = []
-        apiResponse.items.filter(item => 
-            item.shortDescription.includes(encodeURIComponent(request.params.query)) && thisArr.push(` ${item.itemId}`)
-        );
+        // return h.proxy({ host: 'http://api.walmartlabs.com/v1/items?ids=14225185,14225186,14225188,14225187,39082884,30146244,12662817,34890820,19716431,42391766,35813552,40611708,40611825,36248492,44109840,23117408,35613901,42248076&apiKey=kjybrqfdgp3u4yv2qzcnjndj', port: 8888, protocol: 'http' });
 
-        return thisArr.length ? thisArr.toString() : 'Sorry, there are no results for your query';
+        // server.method('apiRequest', function (){
+        //     const result = request('http://api.walmartlabs.com/v1/items?ids=14225185,14225186,14225188,14225187,39082884,30146244,12662817,34890820,19716431,42391766,35813552,40611708,40611825,36248492,44109840,23117408,35613901,42248076&apiKey=kjybrqfdgp3u4yv2qzcnjndj', (error, response, body) => {
+        //         console.log('error:', error); // Print the error if one occurred
+        //         console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
+        //         console.log('body:', body); // Print the HTML for the Google homepage.
+        //     });
+    
+        //     return result;
+        // })
+
+
+        // let thisArr = []
+        // apiResponse.items.filter(item => 
+        //     item.shortDescription.includes(encodeURIComponent(request.params.query)) && thisArr.push(` ${item.itemId}`)
+        // );
+
+        // return thisArr.length ? thisArr.toString() : 'Sorry, there are no results for your query';
 
     }
 });
 
-const init = async () => {
+// server.route({
+//     method: 'GET',
+//     path: '/wml',
+//     handler: {
+//         proxy: {
+//             uri: 'http://api.walmartlabs.com/v1/items?ids=14225185,14225186,14225188,14225187,39082884,30146244,12662817,34890820,19716431,42391766,35813552,40611708,40611825,36248492,44109840,23117408,35613901,42248076&apiKey=kjybrqfdgp3u4yv2qzcnjndj'
+//         }
+//     }
+// });
 
+// server.route({
+//     method: 'GET',
+//     path: '/',
+//     handler: {
+//         proxy: {
+//             mapUri: function (request) {
+
+//                 console.log('doing some additional stuff before redirecting');
+//                 return {
+//                     uri: 'http://api.walmartlabs.com/v1/items?ids=14225185,14225186,14225188,14225187,39082884,30146244,12662817,34890820,19716431,42391766,35813552,40611708,40611825,36248492,44109840,23117408,35613901,42248076&apiKey=kjybrqfdgp3u4yv2qzcnjndj'
+//                 };
+//             },
+//             onResponse: function (err, res, request, h, settings, ttl) {
+
+//                 console.log('receiving the response from the upstream.');
+//                 Wreck.read(res, { json: true }, function (err, payload) {
+
+//                     console.log('some payload manipulation if you want to.')
+//                     const response = h.response(payload);
+//                     response.headers = res.headers;
+//                     return response;
+//                 });
+//             }
+//         }
+//     }
+// });
+
+const init = async () => {
+    // await server.register({ plugin: require('h2o2') });
     await server.start();
     console.log(`Server running at: ${server.info.uri}`);
 };
