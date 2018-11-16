@@ -5,6 +5,7 @@
   "main": "index.js",
   "license": "MIT",
   "dependencies": {
-    "hapi": "^17.7.0"
+    "hapi": "^17.7.0",
+    "wreck": "^14.1.3"
   }
 }
