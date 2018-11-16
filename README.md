@@ -8,11 +8,11 @@ http://localhost:8000/<search term goes here>
 #### EXAMPLE: #### 
 http://localhost:8000/backpack
   
-Instructions for getting started:
-Clone repo
-Go into resulting folder from clone and perform an 'npm install'
-To start application, from within the cloned application folder, and after you have done the 'npm install', execute a 'node index.js'. This will start the application using port 8000
-NOTE: App is setup to use port 8000, you can modify this in the server.js file if needed
+#### Instructions for getting started: ####
+* Clone repo
+* Go into resulting folder from clone and perform an 'npm install'
+* To start application, from within the cloned application folder, and after you have done the 'npm install', execute a 'node index.js'. This will start the application using port 8000
+* #### NOTE: #### App is setup to use port 8000, you can modify this in the server.js file if needed
 
-WML Folks....
+#### WML Folks.... ####
 Thanks for the chance. As you can imagine, Im pressed for time trying to fit the code challenge in between work and family. I intentionally did not learn to test HAPI and am providing what Ive done as proof of compentency in hopes of another interview. 
